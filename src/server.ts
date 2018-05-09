@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import { schema } from './schema/schema';
+// import {getPeople} from './retrieve_stuff_from_api';
 
 // Initialize the app
 const app = express();

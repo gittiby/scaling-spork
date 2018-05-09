@@ -117,5 +117,6 @@ export class Book {
 
 export const books: Book[] = [
   new Book('Harry Potter and the Sorcerer\'s stone', 'J.K. Rowling'),
-  new Book('Jurassic Park', 'Michael Crichton')
+  new Book('Jurassic Park', 'Michael Crichton'),
+  new Book('Game of Thrones', 'GRRM')
 ]
