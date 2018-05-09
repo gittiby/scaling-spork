@@ -104,3 +104,18 @@ export const testfilm = {
   edited: '2015-04-11T09:46:52.774897Z',
   url: 'https://swapi.co/api/films/1/'
 }
+
+// Some fake data
+export class Book {
+  title: string;
+  author: string
+  constructor(t: string, a: string) {
+    this.title = t;
+    this.author = a;
+  }
+}
+
+export const books: Book[] = [
+  new Book('Harry Potter and the Sorcerer\'s stone', 'J.K. Rowling'),
+  new Book('Jurassic Park', 'Michael Crichton')
+]
