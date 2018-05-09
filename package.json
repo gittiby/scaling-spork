@@ -1,0 +1,21 @@
+{
+  "name": "swgraphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.1.2",
+    "nodemon": "^1.17.4",
+    "ts-node": "^6.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^10.0.6",
+    "typescript": "^2.8.3"
+  }
+}
