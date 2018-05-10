@@ -1,4 +1,7 @@
 {
+  "lib": [
+
+  ],
   "exclude": [
     "./node_modules"
   ],
@@ -6,8 +9,9 @@
     "./src/**/*"
   ],
   "compilerOptions": {
+    "target": "es6",
     "module": "commonjs",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
   },
 }

@@ -12,3 +12,13 @@ export const getPeople = (id: number) : any => fetchApiData(getApiUri('people', 
 export const getFilm = (id: number) : any =>  fetchApiData(getApiUri('films', id));
 export const getShip = (id: number) : any => fetchApiData(getApiUri('starships', id));
 export const getPlanet = (id: number) : any => fetchApiData(getApiUri('planets', id));
+
+export const FortuneCookie = {
+  getOne() {
+    return fetch('http://fortunecookieapi.herokuapp.com/v1/cookie')
+      .then(res => res.json())
+      .then(res => {
+        return res[0].fortune.message;
+      });
+  },
+};
