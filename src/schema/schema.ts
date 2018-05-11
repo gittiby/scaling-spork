@@ -1,7 +1,8 @@
 // ts / es6 import thing - unless you specify a defult, must wrap in {} when importing
 import resolvers from './resolvers';
 import { makeExecutableSchema } from 'graphql-tools';
-import Author from './author';
+import {BookType} from './book';
+import {AuthorType} from './author';
 
 const RootQuery = `
   type Query {
@@ -12,6 +13,7 @@ const RootQuery = `
   }
 `
 export const schema = makeExecutableSchema({
-  typeDefs: [RootQuery, ...Author],
-  resolvers: resolvers
+  typeDefs: [RootQuery, BookType, AuthorType],
+  resolvers: resolvers,
+  logger: console
 });
