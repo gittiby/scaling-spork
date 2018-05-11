@@ -2,23 +2,16 @@
 import resolvers from './resolvers';
 import { makeExecutableSchema } from 'graphql-tools';
 import Author from './author';
-import author from './author';
 
 const RootQuery = `
-  type RootQuery {
+  type Query {
     books: [Book]
     authors: [Author]
     author(name: String!): Author
     fortuneCookie: String
   }
 `
-const SchemaDefinition = `
-  schema {
-    query: RootQuery
-  }
-`;
-
 export const schema = makeExecutableSchema({
-  typeDefs: [SchemaDefinition, RootQuery, ...Author],
+  typeDefs: [RootQuery, ...Author],
   resolvers: resolvers
 });

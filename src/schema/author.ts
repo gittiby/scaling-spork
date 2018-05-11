@@ -9,5 +9,6 @@ const Author = `
 `;
 
 // wrap this and all types it depends on to avoid string deduplication
-export default [ Author, Book ];
+export default [ Author, ...Book ];
+// do it this way if circular dependencies
 // export default () => [ Author, Book ];

@@ -1,0 +1,44 @@
+query getAuthors{
+  authors{
+    name
+    age
+    book{
+      title
+    }
+  }
+}
+
+query getGeorge{
+  author(name:"GRRM"){
+    name
+    age
+    book{
+      title
+    }
+  }
+}
+
+query getFortune{
+  fortuneCookie
+}
+
+# mutation example with passing params in via query variables
+mutation testwithinput($id: Int!){
+  increaseReadCount(id:$id){
+    id
+    title
+    readCount
+  }
+}
+# put params into query variables tab in graphiql
+{
+  id: 2
+}
+
+mutation normaltest{
+  increaseReadCount(id: 1){
+    title
+    author
+    readCount
+  }
+}
