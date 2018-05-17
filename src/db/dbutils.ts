@@ -1,15 +1,20 @@
-import {Cluster, N1qlQuery, query, Bucket} from 'couchbase';
+import {Cluster, CreateBucketOptions, N1qlQuery, Bucket, ClusterManager} from 'couchbase';
 
 export default class CouchConnection {
   url: string
+  db: string
+  cluster: Cluster
   bucket: Bucket
-  constructor(url: string) {
+
+  constructor(url: string, db: string) {
     this.url = url;
+    this.db  = db;
+    this.init();
   }
-  loadDb() {
-    this.bucket = (new Cluster(this.url));
-    this.bucket.authenticate('Administrator', 'password');
-    this.bucket.openBucket('travel-sample');
+  init() {
+    this.cluster = (new Cluster(this.url));
+    this.cluster.authenticate('Administrator', 'password');
+    this.bucket = this.cluster.openBucket(this.db);
   }
   testQuery() {
     const n1ql = 'SELECT callsign FROM `travel-sample` LIMIT 10'
