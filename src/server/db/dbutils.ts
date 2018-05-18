@@ -26,14 +26,8 @@ export default class CouchConnection {
       .catch(err => console.log(err));
   } 
 
-  getEntry<T>(arg: T, id:number): T {
-
-    return arg;
-  }
-
   async executeQuery(qstr: string) {
-    let result = await queryAsync(toN1qlQuery(qstr), this.bucket);
-    return result;
+    return await queryAsync(toN1qlQuery(qstr), this.bucket);
   }
 
 }

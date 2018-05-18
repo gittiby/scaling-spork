@@ -5,11 +5,13 @@
 
 uses the couchbase server sample database __travel-sample__
 
-### setup
+### setup server
 1. clone repo
 1. run `yarn`
 1. [setup couchbase server via docker](https://hub.docker.com/r/couchbase/server/)
 1. `npm run start`
+
+### setup client
 
 #### THE ws_next stack
 1. gRPC

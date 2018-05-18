@@ -9,8 +9,13 @@
     "./src/**/*"
   ],
   "compilerOptions": {
-    "target": "es6",
+    "target": "esnext",
     "module": "commonjs",
+    "outDir": "dist",
+    "allowJs":true,
+    // "strictNullChecks": true,
+    "sourceMap": true,
+    "jsx": "react",
     // "noUnusedLocals": true,
     // "noUnusedParameters": true,
   },

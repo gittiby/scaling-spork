@@ -1,19 +1,4 @@
-interface GeoLocationJSON {
-  alt: number;
-  lat: number;
-  lon: number;
-}
-
-export class GeoLocation {
-  alt: number;
-  lat: number;
-  lon: number;
-  constructor(la: number, lo: number, al: number) {
-    this.lat = la;
-    this.lon = lo;
-    this.alt = al;
-  }
-}
+import GeoLocation from './GeoLocation';
 
 interface AirportJSON {
   airportname: string
@@ -26,7 +11,7 @@ interface AirportJSON {
   tz: string;
 }
 
-export class Airport {
+export default class Airport {
   airportname: string
   city: string
   country: string
@@ -51,28 +36,5 @@ export class Airport {
   }
   saymyname() :void {
     console.log(this.airportname);
-  }
-}
-
-interface AirlineJSON {
-  callsign: string;
-  country: string;
-  icao: string;
-  id: number;
-  name: string;
-}
-
-export class Airline {
-  callsign: string;
-  country: string;
-  icao: string;
-  id: number;
-  name: string;
-  constructor(call: string, ca: string, ic: string, id: number, na: string) {
-    this.callsign = call;
-    this.country = ca;
-    this.icao = ic;
-    this.id = id;
-    this.name = na;
   }
 }

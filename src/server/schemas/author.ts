@@ -1,4 +1,5 @@
-import {books, authors, findAuthor} from '../models/test_data';
+import {findAuthor, authors} from '../models/Author';
+import {books} from '../models/Book';
 
 export const AuthorType = `
   type Author {

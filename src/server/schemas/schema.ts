@@ -1,5 +1,5 @@
 // ts / es6 import thing - unless you specify a defult, must wrap in {} when importing
-import resolvers from './resolvers';
+import resolvers from '../resolvers/testDataResolvers';
 import { makeExecutableSchema } from 'graphql-tools';
 import {BookType} from './book';
 import {AuthorType} from './author';

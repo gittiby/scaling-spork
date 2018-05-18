@@ -1,17 +1,5 @@
-export class Author {
-  name: string
-  age: number
-  constructor(name: string, age: number) {
-    this.name = name;
-    this.age = age;
-  }
-}
+import {authors} from './Author';
 
-export const authors: Author[] = [
-  new Author('J.K. Rowling', 33),
-  new Author('Michael Crichton', 3),
-  new Author('GRRM', 330),
-]
 export class Book {
   title: string;
   author: string
@@ -31,6 +19,3 @@ export const books: Book[] = [
   new Book(2, 'Jurassic Park', authors[1].name, 0),
   new Book(3, 'Game of Thrones', authors[2].name, 3)
 ]
-
-export const findAuthor = (name: string) => authors.find((author) => author.name === name);
-export const testDb = {};
