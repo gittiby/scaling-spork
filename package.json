@@ -19,11 +19,15 @@
     "lodash": "^4.17.10",
     "node-fetch": "^2.1.2",
     "nodemon": "^1.17.4",
+    "rewire-core": "^1.0.0-beta.12",
+    "rewire-graphql": "^1.0.0-beta.12",
+    "rewire-grid": "^1.0.0-beta.12",
+    "rewire-ui": "^1.0.0-beta.12",
     "ts-node": "^6.0.3"
   },
   "devDependencies": {
-    "@types/node": "^10.0.6",
     "@types/couchbase": "^2.1.30",
+    "@types/node": "^10.0.6",
     "typescript": "^2.8.3"
   }
 }
