@@ -6,6 +6,7 @@ export const AirportType = `
     name: String
     geo: [Coordinate]
     country: String
+    city: String
     icao: String
   }
 `

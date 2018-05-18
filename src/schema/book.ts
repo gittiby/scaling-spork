@@ -1,4 +1,4 @@
-import {Book, books, Author, authors} from '../test_data';
+import {Book, books, Author, authors} from '../models/test_data';
 
 export const BookType = `
   type Book {
