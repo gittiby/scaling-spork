@@ -1,7 +1,9 @@
 import {Cluster, CreateBucketOptions, N1qlQuery, Bucket} from 'couchbase';
+import {bucketName, couchDbURL} from '../server_configs';
 import {prettyLog, queryAsync, toN1qlQuery} from './helpers';
+import Airline from '../models/Airline'
 
-export default class CouchConnection {
+class CouchConnection {
   couchServerURL: string
   bucketName: string
   cluster: Cluster
@@ -19,35 +21,10 @@ export default class CouchConnection {
     this.bucket = this.cluster.openBucket(this.bucketName);
   }
 
-  testQuery() {
-    const q: string = 'SELECT * FROM `travel-sample` WHERE type = \'airport\' LIMIT 1'
-    queryAsync(toN1qlQuery(q), this.bucket)
-      .then(( response: JSON ) => prettyLog(response))
-      .catch(err => console.log(err));
-  } 
-
-  async executeQuery(qstr: string) {
-    return await queryAsync(toN1qlQuery(qstr), this.bucket);
+  async executeQuery(qstr: N1qlQuery | string) : Promise<any> {
+    return await queryAsync(qstr instanceof N1qlQuery ? qstr : toN1qlQuery(qstr), this.bucket);
   }
-
 }
 
-/* types
-[
-  {
-    "type": "airline"
-  },
-  {
-    "type": "airport"
-  },
-  {
-    "type": "hotel"
-  },
-  {
-    "type": "landmark"
-  },
-  {
-    "type": "route"
-  }
-]
-*/
+const dbConnection = new CouchConnection(couchDbURL, bucketName);
+export default dbConnection;

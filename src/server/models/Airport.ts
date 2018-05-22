@@ -1,4 +1,6 @@
 import GeoLocation from './GeoLocation';
+import TravelSampleType from './TravelSample'
+import {bucketName} from '../server_configs'
 
 interface AirportJSON {
   airportname: string
@@ -11,7 +13,7 @@ interface AirportJSON {
   tz: string;
 }
 
-export default class Airport {
+export default class Airport implements TravelSampleType {
   airportname: string
   city: string
   country: string
@@ -20,21 +22,14 @@ export default class Airport {
   icao: String
   id: number
   tz: string;
-  constructor(name: string, city: string, country: string, faa:string, geo: GeoLocation, icao: string, id: number, tz: string) {
-    this.airportname = name;
-    this.city = city;
-    this.country = country;
-    this.faa = faa;
-    this.geo = geo;
-    this.icao = icao;
-    this.id = id;
-    this.tz = tz;
+  type: string;
+  constructor() {
+    this.type = 'airport';
   }
-  static fromJson(json: AirportJSON) : Airport {
+
+  fromJson(json: any) : Airport {
+    let apJson: AirportJSON = json[bucketName];
     let airport = Object.create(Airport.prototype);
-    return Object.assign(airport, json);
-  }
-  saymyname() :void {
-    console.log(this.airportname);
+    return Object.assign(airport, apJson);
   }
 }
