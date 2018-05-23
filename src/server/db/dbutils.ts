@@ -1,7 +1,7 @@
 import {Cluster, CreateBucketOptions, N1qlQuery, Bucket} from 'couchbase';
 import {bucketName, couchDbURL} from '../server_configs';
-import {prettyLog, queryAsync, toN1qlQuery} from './helpers';
-import Airline from '../models/Airline'
+import TravelSampleType from '../models/TravelSample';
+import {prettyLog, queryAsync} from './helpers';
 
 class CouchConnection {
   couchServerURL: string
@@ -21,8 +21,21 @@ class CouchConnection {
     this.bucket = this.cluster.openBucket(this.bucketName);
   }
 
-  async executeQuery(qstr: N1qlQuery | string) : Promise<any> {
-    return await queryAsync(qstr instanceof N1qlQuery ? qstr : toN1qlQuery(qstr), this.bucket);
+  private async executeQuery(qstr: N1qlQuery | string) : Promise<any> {
+    return await queryAsync(qstr instanceof N1qlQuery ? qstr : this.toN1qlQuery(qstr), this.bucket);
+  }
+
+  private mapCbResponse<T extends TravelSampleType>(prom: Promise<any>, arg: T): any {
+    return prom.then(json => json.map(apJson => arg.fromJson(apJson)))
+      .catch(err => new Error(err));
+  };
+
+  private toN1qlQuery(queryString: string) : N1qlQuery {
+    return N1qlQuery.fromString(queryString.replace('bucket', `\`${bucketName}\``));
+  }
+
+  async fetch<T extends TravelSampleType>(query: N1qlQuery, arg: T) : Promise<any> {
+    return this.mapCbResponse(this.executeQuery(query), arg)
   }
 }
 

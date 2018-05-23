@@ -1,25 +1,22 @@
-### a simple app for learning ws_next tools/frameworks:
-* graphql
-* couchbase
-* rewire
-
-uses the couchbase server sample database __travel-sample__
-
+## a simple app for learning ws_next tools/frameworks:
 ### setup server
-1. clone repo
+1. `cd ./src/server`
 1. run `yarn`
 1. [setup couchbase server via docker](https://hub.docker.com/r/couchbase/server/)
-1. `npm run start`
-
+   1. currently using the server sample database __travel-sample__
+1. `npm run startserver`
 ### setup client
-
-#### THE ws_next stack
+1. `cd ./src/client`
+1. run `yarn`
+1. `npm run startclient`
+### THE ws_next stack
 1. gRPC
 1. ksql
 1. graphql
 1. rewire
 1. couchdb
-1. kafka
-   * librdkafka?
+1. kafka - _librdkafka_?
 1. kubernetes
 1. elasticsearch?
+### todo:
+*

@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "startdb": "docker start db",
     "startserver": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/server/server.ts",
     "startclient": "parcel .\\src\\client\\index.html"
   },
-  "author": "",
+  "author": "jcraven",
   "license": "ISC",
   "dependencies": {
     "nodemon": "^1.17.4",

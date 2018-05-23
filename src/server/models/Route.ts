@@ -34,7 +34,6 @@ export default class Route implements TravelSampleType{
   constructor() {
     this.type = 'route';
   }
-
   fromJson(json: any): Route {
     let apJson: routeJSON = json[bucketName];
     let airport = Object.create(Route.prototype);

@@ -13,11 +13,11 @@ export const AirlineType = `
     type: String
   }
 `
-const blankAirline = new Airline();
+const airline = new Airline();
 
 export const resolvers = {
   Query: {
-    airlines: (_, args) => dbhelp.mapCbResponse(dbConnection.executeQuery(dbhelp.getByTypeQuery(blankAirline)), blankAirline),
-    airline: (_, args) => dbhelp.mapCbResponse(dbConnection.executeQuery(dbhelp.getByIdQuery(args.id, blankAirline)), blankAirline),
+    airlines: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(airline), airline),
+    airline: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, airline), airline)
   },
 }

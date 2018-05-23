@@ -19,12 +19,12 @@ export const AirportType = `
     type: String
   }
 `
-const blankAirport = new Airport(); // need new instance of class to get type :|
+const airport = new Airport(); // need new instance of class to get type :|
 
 export const resolvers = {
   Query: {
-    airports: (_, args) => dbhelp.mapCbResponse(dbConnection.executeQuery(dbhelp.getByTypeQuery(blankAirport)), blankAirport),
-    airport: (_, args) => dbhelp.mapCbResponse(dbConnection.executeQuery(dbhelp.getByIdQuery(args.id, blankAirport)), blankAirport),
+    airports: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(airport), airport),
+    airport: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, airport), airport),
   },
   Airport: {
     geo: (airport) => [airport.geo],
