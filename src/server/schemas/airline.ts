@@ -17,7 +17,7 @@ const airline = new Airline();
 
 export const resolvers = {
   Query: {
-    airlines: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(args.howMany, airline), airline),
-    airline: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, airline), airline)
+    // airlines: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(args.howMany, airline), airline),
+    // airline: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, airline), airline)
   },
 }

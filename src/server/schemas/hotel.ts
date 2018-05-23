@@ -35,8 +35,8 @@ const hotel = new Hotel();
 
 export const resolvers = {
   Query: {
-    hotels: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(args.howMany, hotel), hotel),
-    hotel: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, hotel), hotel),
+    // hotels: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(args.howMany, hotel), hotel),
+    //hotel: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, hotel), hotel),
   },
   Hotel: {
     reviews: (hotel) => hotel.reviews,
