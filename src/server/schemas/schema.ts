@@ -10,18 +10,36 @@ import {resolvers as RouteResolver} from '../schemas/route';
 import {resolvers as HotelResolver} from '../schemas/hotel';
 import {merge} from 'lodash';
 
-const resolvers = merge(AirportResolver, AirlineResolver, RouteResolver, HotelResolver);
+import dbConnection from '../db/dbutils';
+import * as dbhelp from '../db/helpers';
+
+
+// const rootResolver = {
+//   Query: {
+//     byId: (_, args) => {
+//       let type = args.type;
+//       let id = args.id;
+//       return dbConnection.fetch(dbhelp.getByTypeQuery(args.howMany, type), type);
+//     }
+//   }
+// }
+
+const resolvers = merge(AirportResolver, AirlineResolver, RouteResolver, HotelResolver, /* rootResolver */);
 
 const RootQuery = `
+  #interface SearchableType {
+  #  type: String!
+  #}
   type Query {
     airport(id: Int!): [Airport]
-    airports: [Airport]
+    airports(howMany: Int!): [Airport]
     airline(id: Int!): [Airline]
-    airlines: [Airline]
+    airlines(howMany: Int!): [Airline]
     route(id: Int!): [Route]
-    routes: [Route]
+    routes(howMany: Int!): [Route]
     hotel(id: Int!): [Hotel]
-    hotels: [Hotel]
+    hotels(howMany: Int!): [Hotel]
+    #byId(type: String!, id: Int!): [Searchable]
   }
 `
 export const schema = makeExecutableSchema({

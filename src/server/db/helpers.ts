@@ -15,4 +15,4 @@ export const queryAsync = (param: N1qlQuery, bucket: Bucket) : Promise<any> => {
 }
 
 export const getByIdQuery = <T extends TravelSampleType>(id: number, arg: T) : N1qlQuery => toN1qlQuery(`SELECT * FROM bucket WHERE type = '${arg.type}' and id = ${id}` );
-export const getByTypeQuery = <T extends TravelSampleType>(arg: T) : N1qlQuery => toN1qlQuery(`SELECT * FROM bucket WHERE type = '${arg.type}' LIMIT 5`);
+export const getByTypeQuery = <T extends TravelSampleType>(howmany: number, arg: T) : N1qlQuery => toN1qlQuery(`SELECT * FROM bucket WHERE type = '${arg.type}' LIMIT ${howmany}`);

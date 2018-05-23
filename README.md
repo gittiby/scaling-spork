@@ -1,4 +1,4 @@
-## a simple app for learning ws_next tools/frameworks:
+## a simple app using couchbase server's travel-sample database for learning ws_next tools
 ### setup server
 1. `cd ./src/server`
 1. run `yarn`
@@ -9,7 +9,7 @@
 1. `cd ./src/client`
 1. run `yarn`
 1. `npm run startclient`
-### this uses:
+### tools/frameworks this app uses:
 <!-- 1. gRPC -->
 <!-- 1. ksql -->
 1. graphql
@@ -21,3 +21,4 @@
 ### todo:
 * fix client/ parcel setup
 * running client/server from one script?
+* make a generic gql query for byid/bytype that includes the typename to reduce num of queries

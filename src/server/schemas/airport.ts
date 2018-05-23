@@ -23,7 +23,7 @@ const airport = new Airport(); // need new instance of class to get type :|
 
 export const resolvers = {
   Query: {
-    airports: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(airport), airport),
+    airports: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(args.howMany, airport), airport),
     airport: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, airport), airport),
   },
   Airport: {

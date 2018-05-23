@@ -1,5 +1,5 @@
-import {Book, books} from '../models/Book';
-import {Author, authors} from '../models/Author';
+import {Book, books} from './Book';
+import {Author, authors} from './Author';
 
 export const BookType = `
   type Book {

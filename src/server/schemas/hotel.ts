@@ -35,7 +35,7 @@ const hotel = new Hotel();
 
 export const resolvers = {
   Query: {
-    hotels: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(hotel), hotel),
+    hotels: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(args.howMany, hotel), hotel),
     hotel: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, hotel), hotel),
   },
   Hotel: {
