@@ -9,14 +9,15 @@
 1. `cd ./src/client`
 1. run `yarn`
 1. `npm run startclient`
-### THE ws_next stack
-1. gRPC
-1. ksql
+### this uses:
+<!-- 1. gRPC -->
+<!-- 1. ksql -->
 1. graphql
 1. rewire
 1. couchdb
-1. kafka - _librdkafka_?
-1. kubernetes
-1. elasticsearch?
+<!-- 1. kafka - _librdkafka_? -->
+<!-- 1. kubernetes -->
+<!-- 1. elasticsearch? -->
 ### todo:
-*
+* fix client/ parcel setup
+* running client/server from one script?

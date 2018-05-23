@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "debugserver": "cd ./src/server && npm run-script debug",
     "startdb": "docker start db",
-    "startserver": "npm run build:live",
-    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/server/server.ts",
     "startclient": "parcel .\\src\\client\\index.html"
   },
   "author": "jcraven",

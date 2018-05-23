@@ -2,7 +2,7 @@ import dbConnection from '../db/dbutils';
 import * as dbhelp from '../db/helpers';
 import Route from '../models/Route';
 
-export const RouteType = `
+export const RouteTypes = `
   type Schedule {
     day: Int
     flight: String

@@ -5,7 +5,6 @@ import { schema } from './schemas/schema';
 import * as helpers from './db/helpers';
 import cb from './db/dbutils';
 import {bucketName, couchDbURL} from './server_configs';
-import Airport from './models/Airport';
 
 const app = express();
 

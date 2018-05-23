@@ -2,10 +2,21 @@ import {bucketName} from '../server_configs'
 import TravelSampleType from './TravelSample'
 import GeoLocation from './GeoLocation';
 
+interface RatingJSON {
+  Cleanliness: number;
+  Location: number;
+  Overall: number;
+  Rooms: number;
+  Service: number;
+  Value: number;
+  "Business service (e.g., internet access)": number
+  "Check in / front desk": number
+}
 interface ReviewJSON {
     author: string;
     content: string;
     date: string;
+    ratings: RatingJSON;
 }
 
 interface HotelJSON {
@@ -38,13 +49,9 @@ export default class Hotel implements TravelSampleType {
   constructor() {
     this.type = 'hotel';
   }
-  // todo: fix reviews
   fromJson(json: any): Hotel {
-    let apJson: HotelJSON = json[bucketName];
-    let rJson: ReviewJSON = json[bucketName] && json[bucketName].reviews;
-    console.log(rJson)
-    let airport = Object.create(Hotel.prototype);
-    let ret = Object.assign(airport, apJson);
-    return ret;
+    let hotelJson: HotelJSON = json[bucketName];
+    let hotel = Object.create(Hotel.prototype);
+    return Object.assign(hotel, hotelJson);
   }
 }
