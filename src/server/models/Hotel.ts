@@ -1,28 +1,28 @@
-import {bucketName} from '../server_configs'
-import TravelSampleType from './TravelSample'
 import GeoLocation from './GeoLocation';
+import ITravelSampleType from './TravelSample';
+import {bucketName} from '../server_configs';
 
-interface RatingJSON {
+interface IRatingJSON {
   Cleanliness: number;
   Location: number;
   Overall: number;
   Rooms: number;
   Service: number;
   Value: number;
-  "Business service (e.g., internet access)": number
-  "Check in / front desk": number
+  'Business service (e.g., internet access)': number;
+  'Check in / front desk': number;
 }
-interface ReviewJSON {
+interface IReviewJSON {
     author: string;
     content: string;
     date: string;
-    ratings: RatingJSON;
+    ratings: IRatingJSON;
 }
 
-interface HotelJSON {
+interface IHotelJSON {
   id: number;
   address: string;
-  reviews: [ReviewJSON];
+  reviews: [IReviewJSON];
   country: string;
   city: string;
   type: string;
@@ -33,25 +33,25 @@ interface HotelJSON {
   geo: GeoLocation;
 }
 
-export default class Hotel implements TravelSampleType {
-  id: number;
-  address: string;
-  reviews: [ReviewJSON];
-  geo: GeoLocation;
-  country: string;
-  city: string;
-  type: string;
-  description: string;
-  name: string;
-  vacancy: boolean;
-  phone: string;
+export default class Hotel implements ITravelSampleType {
+  public id: number;
+  public address: string;
+  public reviews: [IReviewJSON];
+  public geo: GeoLocation;
+  public country: string;
+  public city: string;
+  public type: string;
+  public description: string;
+  public name: string;
+  public vacancy: boolean;
+  public phone: string;
 
   constructor() {
     this.type = 'hotel';
   }
-  fromJson(json: any): Hotel {
-    let hotelJson: HotelJSON = json[bucketName];
-    let hotel = Object.create(Hotel.prototype);
+  public fromJson(json: any): Hotel {
+    const hotelJson: IHotelJSON = json[bucketName];
+    const hotel = Object.create(Hotel.prototype);
     return Object.assign(hotel, hotelJson);
   }
 }

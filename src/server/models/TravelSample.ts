@@ -1,4 +1,4 @@
-export default interface TravelSampleType {
-  readonly type: string
+export default interface ITravelSampleType {
+  readonly type: string;
   fromJson: any;
 }

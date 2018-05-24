@@ -1,5 +1,5 @@
-import {Book, books} from './Book';
 import {Author, authors} from './Author';
+import {Book, books} from './Book';
 
 export const BookType = `
   type Book {
@@ -12,7 +12,7 @@ export const BookType = `
   type Mutation {
     # takes a single param id, returns a Book
     increaseReadCount ( id: Int! ) : Book
-    # changeAuthor(id: Int!, author: Author) : 
+    # changeAuthor(id: Int!, author: Author) :
   }
 `;
 
@@ -23,8 +23,10 @@ export const resolvers = {
 
   Mutation: {
     increaseReadCount: (root, args) => {
-      const book: Book = books.find(book => book.id === args.id);
-      if (!book) throw new Error(`couldn't find book with id ${args.id}`);
+      const book: Book = books.find((b) => b.id === args.id);
+      if (!book) {
+        throw new Error(`couldn't find book with id ${args.id}`);
+      }
       book.readCount ++;
       return book;
     },
@@ -37,6 +39,5 @@ export const resolvers = {
   },
 
   Author: {
-
-  }
-}
+  },
+};

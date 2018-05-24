@@ -1,6 +1,6 @@
 import dbConnection from '../db/dbutils';
 import * as dbhelp from '../db/helpers';
-import Airline from '../models/Airline'; 
+import Airline from '../models/Airline';
 
 export const AirlineType = `
   type Airline {
@@ -12,7 +12,8 @@ export const AirlineType = `
     name: String
     type: String
   }
-`
+`;
+
 const airline = new Airline();
 
 export const resolvers = {
@@ -20,4 +21,4 @@ export const resolvers = {
     // airlines: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(args.howMany, airline), airline),
     // airline: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, airline), airline)
   },
-}
+};

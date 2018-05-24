@@ -1,6 +1,6 @@
-import {bucketName} from '../server_configs'
-import TravelSampleType from './TravelSample'
-interface AirlineJSON {
+import {bucketName} from '../server_configs';
+import ITravelSampleType from './TravelSample';
+interface IAirlineJSON {
   callsign: string;
   country: string;
   iata: string;
@@ -10,21 +10,21 @@ interface AirlineJSON {
   type: string;
 }
 
-export default class Airline implements TravelSampleType{
-  callsign: string;
-  country: string;
-  iata: string;
-  icao: string;
-  id: number;
-  name: string;
-  type: string;
+export default class Airline implements ITravelSampleType{
+  public callsign: string;
+  public country: string;
+  public iata: string;
+  public icao: string;
+  public id: number;
+  public name: string;
+  public type: string;
   constructor() {
     this.type = 'airline';
   }
 
-  fromJson(json: any): Airline {
-    let apJson: AirlineJSON = json[bucketName];
-    let airport = Object.create(Airline.prototype);
+  public fromJson(json: any): Airline {
+    const apJson: IAirlineJSON = json[bucketName];
+    const airport = Object.create(Airline.prototype);
     return Object.assign(airport, apJson);
   }
 }

@@ -21,11 +21,12 @@ export const RouteTypes = `
   stops: Int
   sourceairport: String
   }
-`
+`;
+
 const route = new Route();
 export const resolvers = {
   Query: {
     // routes: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(args.howMany, route), route),
     // route: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, route), route),
   },
-}
+};

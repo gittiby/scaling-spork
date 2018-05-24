@@ -6,7 +6,9 @@
   "scripts": {
     "debugserver": "cd ./src/server && npm run-script debug",
     "startdb": "docker start db",
-    "startclient": "parcel .\\src\\client\\index.html"
+    "startclient": "parcel .\\src\\client\\index.html",
+    "lintclient": "tslint -c ./tslint.json './src/client/**/*.ts*'",
+    "lintserver": "tslint -c ./tslint.json './src/server/**/*.ts*'"
   },
   "author": "jcraven",
   "license": "ISC",

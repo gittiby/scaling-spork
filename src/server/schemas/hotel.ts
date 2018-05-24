@@ -20,7 +20,7 @@ export const HotelTypes = `
   type Hotel {
     id: Int!
     address: String
-    geo: [GeoLocation] 
+    geo: [GeoLocation]
     country: String
     city: String
     type: String
@@ -30,19 +30,20 @@ export const HotelTypes = `
     vacancy: Boolean
     phone: String
   }
-`
+`;
+
 const hotel = new Hotel();
 
 export const resolvers = {
   Query: {
     // hotels: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(args.howMany, hotel), hotel),
-    //hotel: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, hotel), hotel),
+    // hotel: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, hotel), hotel),
   },
   Hotel: {
-    reviews: (hotel) => hotel.reviews,
-    geo: (hotel) => [hotel.geo]
+    reviews: (h) => h.reviews,
+    geo: (h) => [h.geo],
   },
   Review: {
-    ratings: (review) => review.ratings
-  }
-}
+    ratings: (review) => review.ratings,
+  },
+};
