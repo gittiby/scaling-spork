@@ -26,22 +26,42 @@ class CouchConnection {
     this.bucket = this.cluster.openBucket(this.bucketName);
   }
 
-  private async executeQuery(qstr: N1qlQuery | string) : Promise<any> {
-    return await queryAsync(qstr instanceof N1qlQuery ? qstr : toN1qlQuery(qstr), this.bucket);
+  private async executeQuery(qstr: N1qlQuery) : Promise<any> {
+    return await queryAsync(qstr, this.bucket);
   }
+
+  private getByTypeQuery = (num: number, type: string) : N1qlQuery => toN1qlQuery(`SELECT * FROM bucket WHERE type = '${type}' LIMIT ${num}`);
+
+  private getByIdQuery = (id: number) : N1qlQuery => toN1qlQuery(`SELECT * FROM bucket where id = ${id} and type='airport'`);
 
   private mapCbResponse<T extends TravelSampleType>(prom: Promise<any>, arg: T): any {
     return prom.then(json => json.map(apJson => arg.fromJson(apJson)))
       .catch(err => new Error(err));
   };
 
-  // async fetch<T extends TravelSampleType>(query: N1qlQuery, arg: T) : Promise<any> {
-  //   return this.mapCbResponse(this.executeQuery(query), arg)
-  // }
+  getByType(type: string, num: number) {
+    let n1Query = this.getByTypeQuery(num, type);
+    return this.fetchWithType(n1Query, type);
+  }
 
-  async fetchGeneric(query: N1qlQuery, type: string) :Promise<any> {
+  getById(id: number) {
+    let n1Query = this.getByIdQuery(id);
+    return this.fetchWithoutType(n1Query).then(j => j);
+  }
+
+  private async fetchWithType(query: N1qlQuery, type: string) :Promise<any> {
     const T: any = this.inferTypeFromString(type);
     return this.mapCbResponse(this.executeQuery(query), T);
+  }
+
+  private async fetchWithoutType(query: N1qlQuery) :Promise<any> {
+    return this.executeQuery(query).then( json => {
+      let firstElement = json && json[0] && json[0][bucketName];
+      let type = firstElement.type;
+      if (!type) return null;
+      const T: any = this.inferTypeFromString(type);
+      return T.fromJson(json[0]);
+    })
   }
 
   private inferTypeFromString(type: string): any {
