@@ -24,6 +24,8 @@ const rootResolver = {
       const r = dbConnection.getByType(args.type, args.num);
       return r;
     },
+    test: () => rando //.filter(p => p.name === args.name);
+ 
   },
   Result: {
     __resolveType(obj, context, info) {
@@ -34,6 +36,15 @@ const rootResolver = {
   },
 };
 
+const rando = [{name: 'bob', age: 44}, {name: 'mark', age: 33}, {name: 'bob', age: 12}];
+
+const testType = `
+  type Test {
+    name: String
+    age: Int
+  }
+`
+
 const resolvers = merge(rootResolver);
 
 const RootQuery = `
@@ -42,11 +53,12 @@ const RootQuery = `
   type Query {
     SearchById(id: Int!): Result
     SearchByType(type: String!, num: Int!): [Result]
+    test: [Test]
   }
 `;
 
 export const schema = makeExecutableSchema({
-  typeDefs: [RootQuery, AirportType, GeoLocationType, AirlineType, RouteTypes, HotelTypes],
+  typeDefs: [RootQuery, AirportType, GeoLocationType, AirlineType, RouteTypes, HotelTypes, testType],
   resolvers,
   logger: console,
 });

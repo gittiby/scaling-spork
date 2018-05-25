@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "debugserver": "cd ./src/server && npm run-script debug",
-    "startdb": "docker start db",
     "debugclient": "cd ./src/client && npm run-script debug",
     "lintclient": "tslint -c ./tslint.json './src/client/**/*.ts*'",
     "lintserver": "tslint -c ./tslint.json './src/server/**/*.ts*'"
