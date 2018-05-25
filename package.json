@@ -6,7 +6,7 @@
   "scripts": {
     "debugserver": "cd ./src/server && npm run-script debug",
     "startdb": "docker start db",
-    "startclient": "parcel .\\src\\client\\index.html",
+    "debugclient": "cd ./src/client && npm run-script debug",
     "lintclient": "tslint -c ./tslint.json './src/client/**/*.ts*'",
     "lintserver": "tslint -c ./tslint.json './src/server/**/*.ts*'"
   },
@@ -17,6 +17,7 @@
     "ts-node": "^6.0.3"
   },
   "devDependencies": {
+    "@types/typescript": "^2.0.0",
     "typescript": "^2.8.3"
   }
 }
