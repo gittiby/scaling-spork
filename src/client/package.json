@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "scripts": {
-    "debug": "parcel --no-cache ./index.html"
-  },
   "dependencies": {
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",

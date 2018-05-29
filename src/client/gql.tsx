@@ -1,21 +1,33 @@
 import gql from 'graphql-tag';
-import {graphqlEndpoint as gqlUrl} from '../../global_configs';
-import {client as graphqlClient, GQL} from 'rewire-graphql';
+import {graphqlEndpoint as gqlUrl, graphqlEndpoint} from '../../global_configs';
+// import {create} from 'rewire-graphql';
+import create from './node_modules/rewire-graphql/client';
 
-export const query = gql`
-  SearchByType(type: "airport", num:1){
+const gqlEndpoint: string = 'http://localhost:4000/graphql';
+
+const client = create(gqlEndpoint);
+
+const query2 = gql`
+  query stuff{
+    test {
+      name
+      age
+    }
+  }
+`
+const query1 = gql`
+  query($type:String!, $numOfAirports: Int!) {
+    SearchByType(type: $type, num: $numOfAirports) {
       ... on Airport{
         airportname
-        id
         country
-        city
       }
     }
-`;
-const client = graphqlClient(gqlUrl);
+  }
+`
 
-export async function getit(q: any) {
-  const results = await client.query(query, {size: 20}).then((res) => {
-    console.log(res);
+export async function getit() {
+  const results = await client.query(query1, {type: 'airport', numOfAirports: 4}).then((res) => {
+    console.log(res.data.SearchByType);
   }).catch((err) => console.log(err));
 }

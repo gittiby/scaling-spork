@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import {Observe, observable, watch} from 'rewire-core';
-import {query, getit} from './gql';
+import {getit} from './gql';
+import gql from 'graphql-tag';
 
 // import {Observe, observable, watch} from 'rewire-core/Observe';
 
@@ -13,11 +14,11 @@ watch(() => employee.name, () => console.log(employee.name)); // watch any chang
 // use plain ole react components. Observe will take a dependency on all 
 // properties accessed during render and only re-render the input when those dependencies change. 
 
-getit(query);
+getit();
 
 ReactDOM.render((
   <div>
-    <h2> hello </h2>
-    <Observe render={() => <input value={employee.name} onChange={(evt) => employee.name = evt.target.value} />} />
+    <h4> hello </h4>
+    <Observe render={() => <input value={employee.name} onChange={(evt) => this.stuff()} />} />
   </div>
 ), document.getElementById('root'));

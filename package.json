@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "startdb": "docker start db",
     "debugserver": "cd ./src/server && npm run-script debug",
-    "debugclient": "cd ./src/client && npm run-script debug",
     "lintclient": "tslint -c ./tslint.json './src/client/**/*.ts*'",
     "lintserver": "tslint -c ./tslint.json './src/server/**/*.ts*'"
   },
@@ -13,10 +13,14 @@
   "license": "ISC",
   "dependencies": {
     "nodemon": "^1.17.4",
+    "react": "^16.4.0",
     "ts-node": "^6.0.3"
   },
   "devDependencies": {
     "@types/typescript": "^2.0.0",
-    "typescript": "^2.8.3"
+    "fuse-box": "^3.2.2",
+    "typescript": "^2.8.3",
+    "uglify-es": "^3.3.9",
+    "uglify-js": "^3.3.27"
   }
 }

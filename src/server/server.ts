@@ -10,7 +10,18 @@ import { schema } from './schemas/schema';
 
 const app = express();
 
-app.use('/graphql', bodyParser.json(), graphqlExpress({schema}));
+app.use('/graphql', (req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type, authorization, content-length, x-requested-with, accept, origin');
+  res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+  res.header('Allow', 'POST, GET, OPTIONS')
+  res.header('Access-Control-Allow-Origin', '*');
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+}, bodyParser.json(), graphqlExpress({schema}));
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 // start server
