@@ -29,3 +29,29 @@
       * page to view available flights returned.
 * add basic auth, using new bucket for users 
 * allow users to save selected routes
+
+--------
+#### Notes ####
+A note about promises that I seem to keep messing up:
+If you have a function declared as async, it __always__ returns a promise.
+
+```javascript
+const someAsync = async () => {
+      const ret = await stuff(); // stuff is some asyncronous call
+      return ret;
+}
+
+/* if you call someAsync you won't get what you want, you'll have to resolve it again.
+Should just have the function return a promise in the first place */
+
+// can call await on this if callee is an async function
+const someAsync = () : Promise<any> => {
+      return stuff();
+}
+
+// caller of this will still have to provide resolve/reject handlers
+const someOtherFunction = async () => {
+      const ret = await someAsync();
+      return ret;
+}
+```

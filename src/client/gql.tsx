@@ -27,15 +27,14 @@ const query1 = gql`
   }
 `;
 
-const getit = async () => {
-  return await rewireGqlClient.query(query1, { type: 'airport', numOfAirports: 4 });
-  // const ap = observable({name: results.data.SearchByType[0].airportname});
-  // console.log(ap);
-  // watch(() => ap, () => console.log(ap.name));
-  // setTimeout(() => {
-  //   ap.name = 'callllifornia';
-  //   console.log(ap);
-  // }, 5000);
+// return promise
+export const getit = () => {
+  return rewireGqlClient.query(query1, { type: 'airport', numOfAirports: 4 });
+  // return res.data.searchType;
 };
 
-export default getit;
+// does some async bs
+export const getitAsync = async () => {
+  const p = await rewireGqlClient.query(query1, { type: 'airport', numOfAirports: 4 });
+  return p;
+};
