@@ -29,6 +29,6 @@ export const resolvers = {
     // airport: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, airport), airport),
   },
   Airport: {
-    geo: (airport) => [airport.geo],
+    geo: (ap) => [ap.geo],
   },
-}
+};

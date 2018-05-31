@@ -1,34 +1,37 @@
 import * as dbhelp from '../db/helpers';
+import dbConnection from '../db/dbutils';
+import {makeExecutableSchema} from 'graphql-tools';
+import {merge} from 'lodash';
 
 import {AirlineType} from './airline';
 import {AirportType} from './airport';
 import {GeoLocationType} from './geolocation';
 import {HotelTypes} from './hotel';
+import {FlightType} from './flight';
 import {RouteTypes} from './route';
-import dbConnection from '../db/dbutils';
-import {makeExecutableSchema} from 'graphql-tools';
-import {merge} from 'lodash';
-import { CLIENT_RENEG_LIMIT } from 'tls';
 
-// import {resolvers as AirportResolver} from '../schemas/airport';
-// import {resolvers as AirlineResolver} from '../schemas/airline';
-// import {resolvers as RouteResolver} from '../schemas/route';
-// import {resolvers as HotelResolver} from '../schemas/hotel';
+import {resolvers as AirportResolvers} from '../schemas/airport';
+import {resolvers as HotelResolvers} from '../schemas/hotel';
+import {resolvers as FlightResolvers} from '../schemas/flight';
+
+import findFlights from '../db/flightQuery';
 
 const rootResolver = {
   Query: {
-    SearchById: (_, args) => {
+    searchId: (_, args) => {
       const r = dbConnection.getById(args.id);
       return r;
     },
-    SearchByType: (_, args) => {
+    searchType: (_, args) => {
       const r = dbConnection.getByType(args.type, args.num);
       return r;
     },
-    test: () => rando,
     findAllAirports: (_, args) => {
       const r = dbConnection.findallAirport(args.nameOrIcaoOrFAa);
-      console.log(r);
+      return r;
+    },
+    findFlights: async (_, args) => {
+      const r = await findFlights(args.from, args.to, args.leave);
       return r;
     },
   },
@@ -41,30 +44,21 @@ const rootResolver = {
   },
 };
 
-const rando = [{name: 'bob', age: 44}, {name: 'mark', age: 33}, {name: 'bob', age: 12}];
-
-const testType = `
-  type Test {
-    name: String
-    age: Int
-  }
-`;
-
-const resolvers = merge(rootResolver);
+const resolvers = merge(rootResolver, AirportResolvers, HotelResolvers);
 
 const RootQuery = `
   union Result = Airport | Airline | Route | Hotel
 
   type Query {
-    SearchById(id: Int!): Result
-    SearchByType(type: String!, num: Int!): [Result]
-    test: [Test]
+    searchId(id: Int!): Result
+    searchType(type: String!, num: Int!): [Result]
     findAllAirports(nameOrIcaoOrFAa: String!): [Airport]
+    findFlights(from: String!, to: String!, leave: Int): [Flight]
   }
 `;
 
 export const schema = makeExecutableSchema({
-  typeDefs: [RootQuery, AirportType, GeoLocationType, AirlineType, RouteTypes, HotelTypes, testType],
+  typeDefs: [RootQuery, AirportType, GeoLocationType, AirlineType, RouteTypes, HotelTypes, FlightType],
   resolvers,
   logger: console,
 });

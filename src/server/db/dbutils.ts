@@ -1,13 +1,14 @@
 import {Bucket, Cluster, CreateBucketOptions, N1qlQuery} from 'couchbase';
 import {bucketName, couchDbURL} from '../server_configs';
-import {prettyLog, queryAsync, toN1qlQuery} from './helpers';
+import {prettyLog, queryAsync, toN1qlQuery, mapCbResponse, executeQuery} from './helpers';
 
 import Airline from '../models/Airline';
 import Airport from '../models/Airport';
 import Hotel from '../models/Hotel';
 import Route from '../models/Route';
 import ITravelSampleType from '../models/TravelSample';
-import findallAirport from './airportQueries';
+import findallAirport from './airportQuery';
+import findFlight from './flightQuery';
 
 class CouchConnection {
   public bucketName: string;
@@ -42,34 +43,19 @@ class CouchConnection {
     this.bucket = this.cluster.openBucket(this.bucketName);
   }
 
-  private async executeQuery(qstr: N1qlQuery): Promise<any> {
-    return await queryAsync(qstr, this.bucket);
-  }
-
   private getByTypeQuery = (num: number, type: string): N1qlQuery =>
     toN1qlQuery(`SELECT * FROM bucket WHERE type = '${type}' LIMIT ${num}`)
 
   private getByIdQuery = (id: number): N1qlQuery =>
     toN1qlQuery(`SELECT * FROM bucket where id = ${id} and type='airport'`)
 
-  private mapCbResponse<T extends ITravelSampleType>(prom: Promise<any>, arg: T): any {
-    return prom.then((json) => {
-      // why is this only sometimes?
-      if (json && json[0] && json[0][bucketName]) {
-        return json.map((apJson) => arg.fromJson(apJson));
-      }
-      return json;
-    })
-      .catch((err) => new Error(err));
-  }
-
   private async fetchWithType(query: N1qlQuery, type: string): Promise<any> {
     const T: any = this.inferTypeFromString(type);
-    return this.mapCbResponse(this.executeQuery(query), T);
+    return mapCbResponse(executeQuery(query), T);
   }
 
   private async fetchWithoutType(query: N1qlQuery): Promise<any> {
-    return this.executeQuery(query).then((json) => {
+    return executeQuery(query).then((json) => {
       const firstElement = json && json[0] && json[0][bucketName];
       const type = firstElement.type;
       if (!type) {

@@ -1,5 +1,5 @@
 const findallAirportQuery = (queryStr: string): string => {
-  const selectport = 'SELECT airportname FROM bucket WHERE';
+  const selectport = 'SELECT * FROM bucket WHERE';
   let queryPrep;
   switch (queryStr.length) {
     case 3: 
@@ -9,7 +9,9 @@ const findallAirportQuery = (queryStr: string): string => {
       queryPrep = `${selectport} icao = '${queryStr.toUpperCase()}'`; 
       break;
     default:
-      queryPrep = `${selectport} WHERE airportname LIKE '${queryStr.toUpperCase()}%'`; 
+      // todo: this is now case sensitive, cant find documentation about how to use this function.lower in node
+      // https://blog.couchbase.com/sql-for-json-query-interface-couchbase-mobile/#patternmatching
+      queryPrep = `${selectport} airportname LIKE '${queryStr}%'`; 
       break;
   }
   return queryPrep;

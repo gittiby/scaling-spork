@@ -19,3 +19,13 @@
 <!-- 1. elasticsearch? -->
 ### todo:
 * running client/server from one script?
+* make frontend
+   * component list:
+      * general label: input
+      * input for findall
+      * input for date picker
+      * checkbox like thing
+      * normal text box input
+      * page to view available flights returned.
+* add basic auth, using new bucket for users 
+* allow users to save selected routes

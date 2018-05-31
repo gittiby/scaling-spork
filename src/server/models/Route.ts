@@ -18,6 +18,8 @@ interface IRouteJSON {
   type: string;
   stops: number;
   sourceairport: string;
+  flight: string;
+  name: string;
 }
 
 export default class Route implements ITravelSampleType {
@@ -36,7 +38,8 @@ export default class Route implements ITravelSampleType {
   }
   public fromJson(json: any): Route {
     const apJson: IRouteJSON = json[bucketName];
-    const airport = Object.create(Route.prototype);
-    return Object.assign(airport, apJson);
+    const route = Object.create(Route.prototype);
+    const r = Object.assign(route, apJson);
+    return r;
   }
 }
