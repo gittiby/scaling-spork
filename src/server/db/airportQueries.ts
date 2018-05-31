@@ -1,7 +1,7 @@
-const findallAirportQuery = (queryStr: string) : string => {
+const findallAirportQuery = (queryStr: string): string => {
   const selectport = 'SELECT airportname FROM bucket WHERE';
   let queryPrep;
-  switch(queryStr.length) {
+  switch (queryStr.length) {
     case 3: 
       queryPrep = `${selectport} faa = '${queryStr.toUpperCase()}'`; 
       break;
@@ -13,5 +13,5 @@ const findallAirportQuery = (queryStr: string) : string => {
       break;
   }
   return queryPrep;
-}
+};
 export default findallAirportQuery;

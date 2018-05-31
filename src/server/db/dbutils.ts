@@ -55,7 +55,7 @@ class CouchConnection {
   private mapCbResponse<T extends ITravelSampleType>(prom: Promise<any>, arg: T): any {
     return prom.then((json) => {
       // why is this only sometimes?
-      if (json && json[0] &&json[0][bucketName]) {
+      if (json && json[0] && json[0][bucketName]) {
         return json.map((apJson) => arg.fromJson(apJson));
       }
       return json;

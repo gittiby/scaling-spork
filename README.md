@@ -6,9 +6,8 @@
    1. currently using the server sample database __travel-sample__
 1. `npm run startserver`
 ### setup client
-1. `cd ./src/client`
 1. run `yarn`
-1. `npm run startclient`
+1. `node ./fuse.js`
 ### tools/frameworks this app uses:
 <!-- 1. gRPC -->
 <!-- 1. ksql -->
@@ -19,6 +18,4 @@
 <!-- 1. kubernetes -->
 <!-- 1. elasticsearch? -->
 ### todo:
-* fix client/ parcel setup
 * running client/server from one script?
-* make a generic gql query for byid/bytype that includes the typename to reduce num of queries

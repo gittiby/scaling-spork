@@ -30,7 +30,7 @@ const rootResolver = {
       const r = dbConnection.findallAirport(args.nameOrIcaoOrFAa);
       console.log(r);
       return r;
-    }
+    },
   },
   Result: {
     __resolveType(obj, context, info) {

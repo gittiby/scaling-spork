@@ -6,6 +6,7 @@ context(class {
     getConfig() {
         return FuseBox.init({
             homeDir: "./src/client",
+            cache: true,
             output: "dist/$name.js",
             target : "browser@es5",
             useTypescriptCompiler : true,

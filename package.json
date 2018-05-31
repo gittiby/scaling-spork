@@ -6,14 +6,22 @@
   "scripts": {
     "startdb": "docker start db",
     "debugserver": "cd ./src/server && npm run-script debug",
+    "debugclient": "node ./fuse.js",
     "lintclient": "tslint -c ./tslint.json './src/client/**/*.ts*'",
     "lintserver": "tslint -c ./tslint.json './src/server/**/*.ts*'"
   },
   "author": "jcraven",
   "license": "ISC",
   "dependencies": {
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.9.2",
     "nodemon": "^1.17.4",
     "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "rewire-core": "^1.0.0-beta.12",
+    "rewire-graphql": "^1.0.0-beta.12",
+    "rewire-grid": "^1.0.0-beta.12",
+    "rewire-ui": "^1.0.0-beta.12",
     "ts-node": "^6.0.3"
   },
   "devDependencies": {
