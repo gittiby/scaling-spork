@@ -8,6 +8,7 @@ import {RouteTypes} from './route';
 import dbConnection from '../db/dbutils';
 import {makeExecutableSchema} from 'graphql-tools';
 import {merge} from 'lodash';
+import { CLIENT_RENEG_LIMIT } from 'tls';
 
 // import {resolvers as AirportResolver} from '../schemas/airport';
 // import {resolvers as AirlineResolver} from '../schemas/airline';
@@ -24,8 +25,12 @@ const rootResolver = {
       const r = dbConnection.getByType(args.type, args.num);
       return r;
     },
-    test: () => rando //.filter(p => p.name === args.name);
- 
+    test: () => rando,
+    findAllAirports: (_, args) => {
+      const r = dbConnection.findallAirport(args.nameOrIcaoOrFAa);
+      console.log(r);
+      return r;
+    }
   },
   Result: {
     __resolveType(obj, context, info) {
@@ -43,7 +48,7 @@ const testType = `
     name: String
     age: Int
   }
-`
+`;
 
 const resolvers = merge(rootResolver);
 
@@ -54,6 +59,7 @@ const RootQuery = `
     SearchById(id: Int!): Result
     SearchByType(type: String!, num: Int!): [Result]
     test: [Test]
+    findAllAirports(nameOrIcaoOrFAa: String!): [Airport]
   }
 `;
 

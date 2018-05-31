@@ -7,6 +7,7 @@ import Airport from '../models/Airport';
 import Hotel from '../models/Hotel';
 import Route from '../models/Route';
 import ITravelSampleType from '../models/TravelSample';
+import findallAirport from './airportQueries';
 
 class CouchConnection {
   public bucketName: string;
@@ -30,6 +31,11 @@ class CouchConnection {
     return this.fetchWithoutType(n1Query).then((j) => j);
   }
 
+  public findallAirport(airportOrIcao: string) {
+    const n1Query = toN1qlQuery(findallAirport(airportOrIcao));
+    return this.fetchWithType(n1Query, 'airport');
+  }
+
   private init() {
     this.cluster = (new Cluster(this.couchServerURL));
     this.cluster.authenticate('Administrator', 'password');
@@ -47,7 +53,13 @@ class CouchConnection {
     toN1qlQuery(`SELECT * FROM bucket where id = ${id} and type='airport'`)
 
   private mapCbResponse<T extends ITravelSampleType>(prom: Promise<any>, arg: T): any {
-    return prom.then((json) => json.map((apJson) => arg.fromJson(apJson)))
+    return prom.then((json) => {
+      // why is this only sometimes?
+      if (json && json[0] &&json[0][bucketName]) {
+        return json.map((apJson) => arg.fromJson(apJson));
+      }
+      return json;
+    })
       .catch((err) => new Error(err));
   }
 
