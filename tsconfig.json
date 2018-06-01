@@ -1,23 +1,22 @@
 {
-  "lib": [
-
-  ],
   "exclude": [
-    "./node_modules"
+    "node_modules", "test", "tests", "dist", "lib", "build"
   ],
-  "include": [
-    "./src/**/*"
-  ],
+  // "include": [
+  //   "./src/**/*"
+  // ],
   "compilerOptions": {
-    // "target": "esnext",
-    "target":"es6",
+    "target": "esnext",
+    "moduleResolution": "node",
     "module": "commonjs",
     "outDir": "dist",
     "allowJs":true,
-    // "strictNullChecks": true,
+    "strictNullChecks": true,
     "sourceMap": true,
     "jsx": "react",
+    "removeComments": true,
     // "noUnusedLocals": true,
     // "noUnusedParameters": true,
+    "pretty": true
   },
 }

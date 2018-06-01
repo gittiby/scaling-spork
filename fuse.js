@@ -5,12 +5,13 @@ const { src, task, watch, context, fuse } = require("fuse-box/sparky");
 context(class {
     getConfig() {
         return FuseBox.init({
+            target : "browser@esnext",
             homeDir: "./src/client",
-            cache: true,
-            output: "dist/$name.js",
-            target : "browser@es5",
             useTypescriptCompiler : true,
+            cache: true,
+            hash: false,
             sourceMaps: true,
+            output: "dist/$name.js",
             plugins: [
                 // CSSPlugin(),
                 // SVGPlugin(),
@@ -40,7 +41,7 @@ task("clean", () => src("dist").clean("dist").exec() )
 
 task("default", ["clean"], async context => {
     const fuse = context.getConfig();
-    fuse.dev();
+    fuse.dev({root: 'dist/', port: 4444});
     context.createBundle(fuse);
     await fuse.run();
 });
@@ -48,7 +49,7 @@ task("default", ["clean"], async context => {
 task("dist", ["clean"], async context => {
     context.isProduction = true;
     const fuse = context.getConfig();
-    fuse.dev(); // remove it later
+    fuse.dev({root: 'dist/', port: 4444}); // remove it later
     context.createBundle(fuse);
     await fuse.run();
 });
