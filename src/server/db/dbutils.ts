@@ -39,7 +39,7 @@ class CouchConnection {
 
   private init() {
     this.cluster = (new Cluster(this.couchServerURL));
-    this.cluster.authenticate('Administrator', 'password');
+    this.cluster.authenticate('admin', 'password');
     this.bucket = this.cluster.openBucket(this.bucketName);
   }
 

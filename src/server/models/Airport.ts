@@ -27,7 +27,7 @@ export default class Airport implements ITravelSampleType {
     this.type = 'airport';
   }
 
-  public fromJson(json: any) : Airport {
+  public fromJson(json: any): Airport {
     const apJson: IAirportJSON = json[bucketName];
     const airport = Object.create(Airport.prototype);
     return Object.assign(airport, apJson);

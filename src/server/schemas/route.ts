@@ -25,8 +25,15 @@ export const RouteTypes = `
 
 const route = new Route();
 export const resolvers = {
-  Query: {
-    // routes: (_, args) => dbConnection.fetch(dbhelp.getByTypeQuery(args.howMany, route), route),
-    // route: (_, args) => dbConnection.fetch(dbhelp.getByIdQuery(args.id, route), route),
-  },
-};
+  Route: {
+    schedule: (r: any) => {
+    //   console.log(r);
+    //   return r.schedule;
+    // },
+      return [{
+        day: 1,
+        flight: 'a2',
+        utc: '3:00am',
+      }];
+    },
+  }};

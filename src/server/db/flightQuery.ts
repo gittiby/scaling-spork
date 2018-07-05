@@ -10,10 +10,17 @@ const findFlights = async (from: string, to: string, leave: number /* ,callback 
   if (faasResult.length !== 2) {
     throw new Error('error: unable to find one of the airports');
   }
-  const fromAirport: string = faasResult.find((ap) => ap.fromAirport).fromAirport;
-  const toAirport: string = faasResult.find((ap) => ap.toAirport).toAirport;
+  const fromAirport: any = faasResult.find((ap) => ap && ap.fromAirport).fromAirport;
+  const toAirport: any = faasResult.find((ap) => ap && ap.toAirport).toAirport;
 
-  queryPrep = `SELECT a.name, s.flight, s.utc, r.sourceairport, r.destinationairport, r.equipment FROM bucket r UNNEST r.schedule s JOIN bucket a ON KEYS r.airlineid WHERE \
+  // const f = fromAirport && fromAirport.fromAirport;
+  // const t = toAirport && toAirport.toAirport;
+
+  // if (fromAirport === undefined || toAirport === undefined) {
+  //   return [];
+  // }
+
+  queryPrep = `SELECT a.name, s.flight, s.utc, r.sourceairport, r.destinationairport, r.equipment, r.schedule FROM bucket r UNNEST r.schedule s JOIN bucket a ON KEYS r.airlineid WHERE \
     r.sourceairport= '${fromAirport}' AND r.destinationairport='${toAirport}' AND s.day= ${leave} ORDER BY a.name`;
   n1Query = toN1qlQuery(queryPrep);
 
