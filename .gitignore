@@ -1,6 +1,7 @@
 node_modules/
 *.diff
 *.err
+.env
 
 # Logs
 logs

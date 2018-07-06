@@ -13,6 +13,8 @@
   "author": "jcraven",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^6.0.0",
+    "firebase-admin": "^5.12.1",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "nodemon": "^1.17.4",
@@ -25,6 +27,7 @@
     "ts-node": "^6.0.3"
   },
   "devDependencies": {
+    "@types/dotenv": "^4.0.3",
     "@types/typescript": "^2.0.0",
     "fuse-box": "^3.2.2",
     "typescript": "^2.8.3",
